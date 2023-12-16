@@ -17,7 +17,8 @@ iocage exec $JAIL mkdir -p /config
 iocage exec $JAIL mkdir -p /media/Movies
 iocage exec $JAIL mkdir -p /media/Torrents
 iocage exec $JAIL mkdir -p /media/Import
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/radarr /config nullfs rw 0 0
+mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Movies /media/Movies nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Torrents /media/Torrents nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Import /media/Import nullfs rw 0 0
