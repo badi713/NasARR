@@ -1,7 +1,7 @@
 #!/bin/bash
 # Create the jail
 JAIL="test112"
-iocage create -n $JAIL -r 12.2-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
+iocage create -n $JAIL -r 12.4-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
 iocage update $JAIL
 
 # Update to the latest repo
