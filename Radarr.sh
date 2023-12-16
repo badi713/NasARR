@@ -3,6 +3,7 @@
 JAIL="Radarr"
 iocage create -n $JAIL -r 13.2-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
 iocage update $JAIL
+iocage set enforce_statfs=1 $JAIL
 
 # Updating the source to the latest repo
 iocage exec $JAIL "mkdir -p /usr/local/etc/pkg/repos"
