@@ -10,7 +10,7 @@ iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/lat
 iocage exec $JAIL pkg update
 
 # Installing nginx and dependencies
-iocage exec $JAIL pkg install -y nginx
+iocage exec $JAIL pkg install -y nginx security/py-certbot-nginx
 
 # Mounting storage and config
 #iocage exec $JAIL mkdir -p /usr/local/etc/nginx
