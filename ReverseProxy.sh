@@ -2,7 +2,8 @@
 # Creating the jail for Reverse proxy. Change the name of the jail
 JAIL="Reversep"
 iocage create -n $JAIL -r 13.2-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
-iocage update $JAIL
+#iocage update $JAIL
+
 
 # Updating the source to the latest repo
 iocage exec $JAIL "mkdir -p /usr/local/etc/pkg/repos"
@@ -19,6 +20,7 @@ iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /usr/local/etc/nginx nul
 
 # Changing ownership to folders
 iocage exec $JAIL "pw groupadd multimedia -g 816"
+iocage exec $JAIL "pw usermod www -G multimedia"
 iocage exec $JAIL chown -R www:multimedia /usr/local/etc/nginx
 
 # Requesting new certificate from LetsEncrypt in standalone mode.
