@@ -13,18 +13,16 @@ iocage exec $JAIL pkg update
 iocage exec $JAIL pkg install -y nginx
 
 # Mounting storage and config
-iocage exec $JAIL mkdir -p /config
+#iocage exec $JAIL mkdir -p /usr/local/etc/nginx
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /usr/local/etc/nginx nullfs rw 0 0
 
 
 # Changing ownership to folders
-iocage exec $JAIL chown -R badi713:multimedia /config
+iocage exec $JAIL "pw groupadd multimedia -g 816"
+iocage exec $JAIL chown -R www:multimedia /config
 
 
-#iocage exec radarr vi /usr/local/etc/rc.d/radarr
-#iocage exec $JAIL sysrc "radarr_enable=TRUE"
-#iocage exec $JAIL sysrc radarr_user=radarr
-#iocage exec $JAIL sysrc radarr_group=multimedia
-#iocage exec $JAIL sysrc radarr_data_dir="/config"
-#iocage exec $JAIL service radarr start
+#iocage exec $JAIL vi /usr/local/etc/rc.d/nginx
+iocage exec $JAIL sysrc nginx_enable="YES"
+iocage exec $JAIL service nginx start
