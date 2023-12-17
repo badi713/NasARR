@@ -23,7 +23,7 @@ iocage exec $JAIL chown -R www:multimedia /usr/local/etc/nginx
 
 # Requesting new certificate from LetsEncrypt in standalone mode.
 # Be sure that the jail is accesible from outside
-certbot certonly --standalone
+iocage exec $JAIL certbot certonly --standalone
 
 #iocage exec $JAIL vi /usr/local/etc/rc.d/nginx
 iocage exec $JAIL sysrc nginx_enable="YES"
