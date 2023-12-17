@@ -14,24 +14,24 @@ iocage exec $JAIL pkg install -y radarr
 
 # Mounting storage and config
 iocage exec $JAIL mkdir -p /config
-iocage exec $JAIL mkdir -p /media/Movies
-iocage exec $JAIL mkdir -p /media/Torrents
-iocage exec $JAIL mkdir -p /media/Import
+iocage exec $JAIL mkdir -p /mnt/Movies
+iocage exec $JAIL mkdir -p /mnt/Torrents
+iocage exec $JAIL mkdir -p /mnt/Import
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
 iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Movies /media/Movies nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Torrents /media/Torrents nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Import /media/Import nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Movies /mnt/Movies nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Torrents /mnt/Torrents nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Import /mnt/Import nullfs rw 0 0
 
-# Creating multimedia group and add radarr user to group
+# Creating multimedia group and add radarr user to group multimedia in jail
 iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL "pw usermod radarr -G multimedia"
 
 # Changing ownership to folders
 iocage exec $JAIL chown -R radarr:multimedia /config
-#iocage exec $JAIL chown -R radarr:multimedia /media/Movies
-#iocage exec $JAIL chown -R radarr:multimedia /media/Torrents
-#iocage exec $JAIL chown -R radarr:multimedia /media/Import
+iocage exec $JAIL chown -R radarr:multimedia /mnt/Movies
+#iocage exec $JAIL chown -R radarr:multimedia /mnt/Torrents
+#iocage exec $JAIL chown -R radarr:multimedia /mnt/Import
 
 
 #iocage exec radarr vi /usr/local/etc/rc.d/radarr
