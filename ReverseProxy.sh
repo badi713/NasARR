@@ -20,7 +20,7 @@ iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /usr/local/etc/nginx nul
 
 # Changing ownership to folders
 iocage exec $JAIL "pw groupadd multimedia -g 816"
-iocage exec $JAIL chown -R www:multimedia /config
+iocage exec $JAIL chown -R www:multimedia /usr/local/etc/nginx
 
 
 #iocage exec $JAIL vi /usr/local/etc/rc.d/nginx
