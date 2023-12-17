@@ -17,12 +17,13 @@ iocage exec $JAIL pkg install -y nginx security/py-certbot-nginx
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
 iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /usr/local/etc/nginx nullfs rw 0 0
 
-
-
 # Changing ownership to folders
 iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL chown -R www:multimedia /usr/local/etc/nginx
 
+# Requesting new certificate from LetsEncrypt in standalone mode.
+# Be sure that the jail is accesible from outside
+certbot certonly --standalone
 
 #iocage exec $JAIL vi /usr/local/etc/rc.d/nginx
 iocage exec $JAIL sysrc nginx_enable="YES"
