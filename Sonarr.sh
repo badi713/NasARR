@@ -15,24 +15,24 @@ iocage exec $JAIL pkg install -y sonarr
 
 # Mounting storage and config
 iocage exec $JAIL mkdir -p /config
-iocage exec $JAIL mkdir -p /media/Shows
-iocage exec $JAIL mkdir -p /media/Torrents
-iocage exec $JAIL mkdir -p /media/Import
+iocage exec $JAIL mkdir -p /mnt/Shows
+iocage exec $JAIL mkdir -p /mnt/Torrents
+iocage exec $JAIL mkdir -p /mnt/Import
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
 iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Shows /media/Shows nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Torrents /media/Torrents nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Import /media/Import nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Torrents /mnt/Torrents nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Import /mnt/Import nullfs rw 0 0
 
-# Creating multimedia group and add Sonarr user to group
+# Creating multimedia group and add Sonarr user to group in jail
 iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL "pw usermod sonarr -G multimedia"
 
 # Changing ownership to folders
 iocage exec $JAIL chown -R sonarr:multimedia /config
-#iocage exec $JAIL chown -R sonarr:multimedia /media/Shows
-#iocage exec $JAIL chown -R sonarr:multimedia /media/Torrents
-#iocage exec $JAIL chown -R sonarr:multimedia /media/Import
+iocage exec $JAIL chown -R sonarr:multimedia /mnt/Shows
+#iocage exec $JAIL chown -R sonarr:multimedia /mnt/Torrents
+#iocage exec $JAIL chown -R sonarr:multimedia /mnt/Import
 
 
 #iocage exec sonarr vi /usr/local/etc/rc.d/sonarr
