@@ -38,7 +38,7 @@ iocage exec $JAIL chown -R bazarr:multimedia /usr/local/bazarr
 #iocage exec $JAIL chown -R bazarr:multimedia /mnt/Movies
 #iocage exec $JAIL chown -R bazarr:multimedia /mnt/Shows
 
-iocage exec bazarr nano /usr/local/etc/rc.d/bazarr
+iocage exec $JAIL nano /usr/local/etc/rc.d/bazarr
 iocage exec $JAIL sysrc "bazarr_enable=TRUE"
 #iocage exec $JAIL sysrc bazarr_user=bazarr
 iocage exec $JAIL sysrc bazarr_group=multimedia
