@@ -14,11 +14,11 @@ iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/lat
 iocage exec $JAIL pkg install -y bazarr
 
 # Mounting storage and config
-iocage exec $JAIL mkdir -p /config
+iocage exec $JAIL mkdir -p /usr/local/bazarr
 iocage exec $JAIL mkdir -p /mnt/Movies
 iocage exec $JAIL mkdir -p /mnt/Shows
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /usr/local/bazarr nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Movies /mnt/Movies nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
 
@@ -27,7 +27,7 @@ iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL "pw usermod bazarr -G multimedia"
 
 # Changing ownership to folders
-iocage exec $JAIL chown -R bazarr:multimedia /config
+iocage exec $JAIL chown -R bazarr:multimedia /usr/local/bazarr
 #iocage exec $JAIL chown -R bazarr:multimedia /mnt/Movies
 #iocage exec $JAIL chown -R bazarr:multimedia /mnt/Shows
 
@@ -35,5 +35,5 @@ iocage exec $JAIL chown -R bazarr:multimedia /config
 iocage exec $JAIL sysrc "bazarr_enable=TRUE"
 #iocage exec $JAIL sysrc bazarr_user=bazarr
 iocage exec $JAIL sysrc bazarr_group=multimedia
-iocage exec $JAIL sysrc bazarr_data_dir="/config"
+#iocage exec $JAIL sysrc bazarr_data_dir="/config"
 iocage exec $JAIL service bazarr start
