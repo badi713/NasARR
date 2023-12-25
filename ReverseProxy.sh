@@ -23,6 +23,7 @@ iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL "pw usermod www -G multimedia"
 
 # Changing ownership to folders
+wget https://github.com/badi713/NasARR/raw/main/nginx.conf -O /usr/local/etc/nginx/nginx.conf --backups=0
 iocage exec $JAIL chown -R www:multimedia /usr/local/etc/nginx
 
 # Requesting new certificate from LetsEncrypt in standalone mode.
