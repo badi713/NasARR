@@ -12,7 +12,7 @@ iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/qua
 iocage exec $JAIL pkg update
 
 # Installing bazarr and dependencies - not found in freshports
-iocage exec $JAIL pkg install -y bazarr
+iocage exec $JAIL pkg install -y bazarr nano
 #iocage exec $JAIL pkg install -y git python39 unrar py39-webrtcvad py39-sqlite3 py39-pillow py39-numpy py39-lxml py39-pip
 
 # Mounting storage and config
@@ -38,7 +38,7 @@ iocage exec $JAIL chown -R bazarr:multimedia /usr/local/bazarr
 #iocage exec $JAIL chown -R bazarr:multimedia /mnt/Movies
 #iocage exec $JAIL chown -R bazarr:multimedia /mnt/Shows
 
-#iocage exec bazarr vi /usr/local/etc/rc.d/bazarr
+iocage exec bazarr nano /usr/local/etc/rc.d/bazarr
 iocage exec $JAIL sysrc "bazarr_enable=TRUE"
 #iocage exec $JAIL sysrc bazarr_user=bazarr
 iocage exec $JAIL sysrc bazarr_group=multimedia
