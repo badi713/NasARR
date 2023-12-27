@@ -8,3 +8,5 @@ wget https://github.com/badi713/NasARR/raw/main/Bazarr.sh -O Bazarr.sh --backups
 chmod u+x Bazarr.sh
 wget https://github.com/badi713/NasARR/raw/main/ReverseProxy.sh -O ReverseProxy.sh --backups=0
 chmod u+x ReverseProxy.sh
+wget https://github.com/badi713/NasARR/raw/main/Jellyfin.sh -O Jellyfin.sh --backups=0
+chmod u+x Jellyfin.sh
