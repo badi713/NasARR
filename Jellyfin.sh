@@ -33,7 +33,7 @@ iocage exec $JAIL chown -R jellyfin:multimedia /config
 #iocage exec $JAIL chown -R jellyfin:multimedia /mnt/Shows
 
 #iocage exec $JAIL nano /usr/local/etc/rc.d/jellyfin
-iocage exec $JAIL sysrc jellyfin_enable=TRUE
+iocage exec $JAIL sysrc jellyfin_enable="YES"
 #iocage exec $JAIL sysrc jellyfin_user=jellyfin
 iocage exec $JAIL sysrc jellyfin_group=multimedia
 iocage exec $JAIL sysrc jellyfin_data_dir="/config"
