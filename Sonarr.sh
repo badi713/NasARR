@@ -35,7 +35,7 @@ iocage exec $JAIL chown -R sonarr:multimedia /mnt/Shows
 #iocage exec $JAIL chown -R sonarr:multimedia /mnt/Import
 
 
-#iocage exec sonarr vi /usr/local/etc/rc.d/sonarr
+#iocage exec $JAIL vi /usr/local/etc/rc.d/sonarr
 iocage exec $JAIL sysrc "sonarr_enable=TRUE"
 #iocage exec $JAIL sysrc sonarr_user=sonarr
 iocage exec $JAIL sysrc sonarr_group=multimedia

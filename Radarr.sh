@@ -35,7 +35,7 @@ iocage exec $JAIL chown -R radarr:multimedia /mnt/Movies
 #iocage exec $JAIL chown -R radarr:multimedia /mnt/Import
 
 
-#iocage exec radarr vi /usr/local/etc/rc.d/radarr
+#iocage exec $JAIL vi /usr/local/etc/rc.d/radarr
 iocage exec $JAIL sysrc "radarr_enable=TRUE"
 #iocage exec $JAIL sysrc radarr_user=radarr
 iocage exec $JAIL sysrc radarr_group=multimedia
