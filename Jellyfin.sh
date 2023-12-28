@@ -1,6 +1,7 @@
 #!/bin/bash
 # Creating the jail for Jellyfin. Change the name of the jail
 JAIL="Jellyfin"
+iocage destroy $JAIL -f
 iocage create -n $JAIL -r 13.2-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
 iocage update $JAIL
 iocage set enforce_statfs=1 $JAIL
@@ -15,11 +16,12 @@ iocage exec $JAIL pkg update
 iocage exec $JAIL pkg install -y jellyfin nano
 
 # Mounting storage and config
-iocage exec $JAIL mkdir -p /config
+#iocage exec $JAIL mkdir -p /config
 iocage exec $JAIL mkdir -p /mnt/Movies
 iocage exec $JAIL mkdir -p /mnt/Shows
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
+#iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /var/db/jellyfin nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Movies /mnt/Movies nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
 
@@ -28,7 +30,7 @@ iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL "pw usermod jellyfin -G multimedia"
 
 # Changing ownership to folders
-iocage exec $JAIL chown -R jellyfin:multimedia /config
+iocage exec $JAIL chown -R jellyfin:multimedia /var/db/jellyfin
 #iocage exec $JAIL chown -R jellyfin:multimedia /mnt/Movies
 #iocage exec $JAIL chown -R jellyfin:multimedia /mnt/Shows
 
@@ -36,7 +38,7 @@ iocage exec $JAIL chown -R jellyfin:multimedia /config
 #iocage exec $JAIL sysrc jellyfin_enable="YES"
 iocage exec $JAIL service jellyfin enable
 #iocage exec $JAIL sysrc jellyfin_user=jellyfin
-#iocage exec $JAIL sysrc jellyfin_group=multimedia
+iocage exec $JAIL sysrc jellyfin_group=multimedia
 #iocage exec $JAIL sysrc jellyfin_data_dir="/config"
 #iocage exec $JAIL sysrc jellyfin_exec_dir="/config"
-#iocage exec $JAIL service jellyfin start
+iocage exec $JAIL service jellyfin start
