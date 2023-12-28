@@ -1,6 +1,7 @@
 #!/bin/bash
 # Creating the jail for Reverse proxy. Change the name of the jail
 JAIL="Reversep"
+iocage destroy $JAIL -f
 iocage create -n $JAIL -r 13.2-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
 #iocage update $JAIL
 
