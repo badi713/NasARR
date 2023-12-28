@@ -16,11 +16,10 @@ iocage exec $JAIL pkg update
 iocage exec $JAIL pkg install -y jellyfin nano
 
 # Mounting storage and config
-#iocage exec $JAIL mkdir -p /config
+iocage exec $JAIL mkdir -p /var/db/jellyfin
 iocage exec $JAIL mkdir -p /mnt/Movies
 iocage exec $JAIL mkdir -p /mnt/Shows
 mkdir /mnt/Tank/Backup/Jailconfig/$JAIL
-#iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /config nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL /var/db/jellyfin nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Movies /mnt/Movies nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
