@@ -8,8 +8,8 @@ iocage set enforce_statfs=1 $JAIL
 
 # Updating the source to the latest repo
 iocage exec $JAIL "mkdir -p /usr/local/etc/pkg/repos"
-#iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/latest\"}' > /usr/local/etc/pkg/repos/FreeBSD.conf"
-iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/quarterly\"}' > /usr/local/etc/pkg/repos/FreeBSD.conf"
+iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/latest\"}' > /usr/local/etc/pkg/repos/FreeBSD.conf"
+#iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/quarterly\"}' > /usr/local/etc/pkg/repos/FreeBSD.conf"
 iocage exec $JAIL pkg update
 
 # Installing bazarr and dependencies - not found in freshports
