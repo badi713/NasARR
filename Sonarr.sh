@@ -3,13 +3,13 @@
 JAIL="Sonarr"
 iocage destroy $JAIL -f
 iocage create -n $JAIL -r 13.2-RELEASE interfaces="vnet0:bridge0" defaultrouter="none" vnet="on" dhcp="on" bpf="yes" allow_raw_sockets="1" allow_mlock="1" boot="on"
-#iocage update $JAIL
+iocage update $JAIL
 iocage set enforce_statfs=1 $JAIL
 
 # Updating the source to the latest repo
 iocage exec $JAIL "mkdir -p /usr/local/etc/pkg/repos"
 iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/latest\"}' > /usr/local/etc/pkg/repos/FreeBSD.conf"
-#iocage exec $JAIL pkg update
+iocage exec $JAIL pkg update
 
 # Installing Sonarr and dependencies
 iocage exec $JAIL pkg install -y sonarr
