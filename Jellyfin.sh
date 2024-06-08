@@ -16,12 +16,12 @@ iocage exec $JAIL pkg update
 
 # Mounting config
 echo "Mounting config"
-mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/db
-mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/web
-iocage exec $JAIL mkdir -p /var/db/jellyfin
-iocage exec $JAIL mkdir -p /usr/local/jellyfin
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/db /var/db/jellyfin nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/web /usr/local/jellyfin nullfs rw 0 0
+#mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/db
+#mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/web
+#iocage exec $JAIL mkdir -p /var/db/jellyfin
+#iocage exec $JAIL mkdir -p /usr/local/jellyfin
+#iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/db /var/db/jellyfin nullfs rw 0 0
+#iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/web /usr/local/jellyfin nullfs rw 0 0
 
 # Installing jellyfin and dependencies
 echo "Installing jellyfin and dependencies"
