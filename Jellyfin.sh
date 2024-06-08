@@ -12,18 +12,20 @@ iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/lat
 #iocage exec $JAIL "echo 'FreeBSD: {url: \"pkg+http://pkg.FreeBSD.org/\${ABI}/quarterly\"}' > /usr/local/etc/pkg/repos/FreeBSD.conf"
 iocage exec $JAIL pkg update
 
+# Mounting config
+mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/db
+mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/web
+iocage exec $JAIL mkdir -p /var/db/jellyfin
+iocage exec $JAIL mkdir -p /usr/local/jellyfin
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/db /var/db/jellyfin nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/web /usr/local/jellyfin nullfs rw 0 0
+
 # Installing jellyfin and dependencies
 iocage exec $JAIL pkg install -y jellyfin nano
 
-# Mounting storage and config
-iocage exec $JAIL mkdir -p /var/db/jellyfin
-iocage exec $JAIL mkdir -p /usr/local/jellyfin
+# Mounting storage
 iocage exec $JAIL mkdir -p /mnt/Movies
 iocage exec $JAIL mkdir -p /mnt/Shows
-mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/db
-mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/web
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/db /var/db/jellyfin nullfs rw 0 0
-iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/web /usr/local/jellyfin nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Movies /mnt/Movies nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
 
