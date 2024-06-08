@@ -16,21 +16,21 @@ iocage exec $JAIL pkg update
 
 # Mounting config
 echo "Mounting config"
-#mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/db
-#mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/web
-#iocage exec $JAIL mkdir -p /var/db/jellyfin
-#iocage exec $JAIL mkdir -p /usr/local/jellyfin
-#iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/db /var/db/jellyfin nullfs rw 0 0
-#iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/web /usr/local/jellyfin nullfs rw 0 0
+mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/db
+mkdir /mnt/Tank/Backup/Jailconfig/$JAIL/web
+iocage exec $JAIL "mkdir -p /var/db/jellyfin"
+iocage exec $JAIL "mkdir -p /usr/local/jellyfin"
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/db /var/db/jellyfin nullfs rw 0 0
+iocage fstab -a $JAIL /mnt/Tank/Backup/Jailconfig/$JAIL/web /usr/local/jellyfin nullfs rw 0 0
 
 # Installing jellyfin and dependencies
 echo "Installing jellyfin and dependencies"
-iocage exec $JAIL pkg install -y jellyfin nano
+iocage exec $JAIL "pkg install -y ffmpeg jellyfin libva-intel-media-driver nano"
 
 # Mounting storage
 echo "Mounting storage"
-iocage exec $JAIL mkdir -p /mnt/Movies
-iocage exec $JAIL mkdir -p /mnt/Shows
+iocage exec $JAIL "mkdir -p /mnt/Movies"
+iocage exec $JAIL "mkdir -p /mnt/Shows"
 iocage fstab -a $JAIL /mnt/Tank/Movies /mnt/Movies nullfs rw 0 0
 iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
 
@@ -41,8 +41,8 @@ iocage exec $JAIL "pw usermod jellyfin -G multimedia"
 
 # Changing ownership to folders
 echo "Changing ownership to folders"
-iocage exec $JAIL chown -R jellyfin:multimedia /var/db/jellyfin
-iocage exec $JAIL chown -R jellyfin:multimedia /usr/local/jellyfin
+iocage exec $JAIL "chown -R jellyfin:multimedia /var/db/jellyfin"
+iocage exec $JAIL "chown -R jellyfin:multimedia /usr/local/jellyfin"
 #iocage exec $JAIL chown -R jellyfin:multimedia /mnt/Movies
 #iocage exec $JAIL chown -R jellyfin:multimedia /mnt/Shows
 
