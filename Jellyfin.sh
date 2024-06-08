@@ -53,6 +53,8 @@ echo "Enable service and run"
 iocage exec $JAIL service jellyfin enable
 #iocage exec $JAIL sysrc jellyfin_user=jellyfin
 iocage exec $JAIL sysrc jellyfin_group=multimedia
-#iocage exec $JAIL sysrc jellyfin_data_dir="/config"
-#iocage exec $JAIL sysrc jellyfin_exec_dir="/config"
+iocage exec $JAIL sysrc JELLYFIN_DATA_DIR=/var/db/jellyfin/data
+iocage exec $JAIL sysrc JELLYFIN_CONFIG_DIR=/var/db/jellyfin/config
+iocage exec $JAIL sysrc JELLYFIN_LOG_DIR=/var/db/jellyfin/log
+iocage exec $JAIL sysrc JELLYFIN_CACHE_DIR=/var/db/jellyfin/cache
 iocage exec $JAIL service jellyfin start
