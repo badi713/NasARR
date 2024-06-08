@@ -38,6 +38,8 @@ iocage fstab -a $JAIL /mnt/Tank/Shows /mnt/Shows nullfs rw 0 0
 echo "Creating multimedia group and add jellyfin user to group multimedia in jail"
 iocage exec $JAIL "pw groupadd multimedia -g 816"
 iocage exec $JAIL "pw usermod jellyfin -G multimedia"
+# Add the video group to the jellyfinserver user
+iocage exec $JAIL "pw groupmod video -m jellyfin"
 
 # Changing ownership to folders
 echo "Changing ownership to folders"
